@@ -1,0 +1,23 @@
+{
+  "name": "schemable",
+  "version": "1.0.0",
+  "description": "JSON Type Check Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsuba3/schemable.git"
+  },
+  "keywords": [
+    "JSON",
+    "type"
+  ],
+  "author": "tsuba3",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsuba3/schemable/issues"
+  },
+  "homepage": "https://github.com/tsuba3/schemable#readme"
+}
