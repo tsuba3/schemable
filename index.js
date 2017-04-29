@@ -186,6 +186,12 @@ class Schemable {
 		return true
 	}
 
+	parse(json) {
+		const obj = JSON.parse(json)
+		this.validate(obj)
+		return obj
+	}
+
 }
 
 module.exports = new Schemable()
