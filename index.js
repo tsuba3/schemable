@@ -181,8 +181,8 @@ class Schemable {
 	}
 
 
-	validate(x) {
-		this.validator.forEach(f => f(x, "It"))
+	validate(x, path) {
+		this.validator.forEach(f => f(x, path || "It"))
 		return true
 	}
 
