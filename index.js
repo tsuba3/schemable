@@ -61,7 +61,7 @@ class Schemable {
 	}
 
 	get string() {
-		return str
+		return this.str
 	}
 
 	get bool() {
@@ -70,6 +70,18 @@ class Schemable {
 				throw new Error(`${path} should be a boolean`)
 			}
 		})
+	}
+
+	get null() {
+		return this.addValidator((x, path) => {
+			if (type(x) != "Null" && type(x) != "Undefined") {
+				throw new Error(`${path} shoud be null or undefined`)
+			}
+		})
+	}
+
+	get undefined() {
+		return this.null
 	}
 
 	get array() {
