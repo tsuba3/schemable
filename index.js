@@ -5,13 +5,22 @@ function type(obj) {
 
 class Schemable {
 
-	constructor(validator) {
+	constructor(validator, map, error) {
 		this.validator = validator || []
+		this.mapper = map || []
+		this.error = error || []
 	}
 
 	addValidator(f) {
-		const res = new Schemable(this.validator.concat(f))
-		return res
+		return new Schemable(this.validator.concat(f), this.mapper, this.error)
+	}
+
+	map(f) {
+		return new Schemable(this.validator, this.mapper.concat(f), this.error)
+	}
+
+	catch(f) {
+		return new Schemable(this.validator, this.mapper, this.error.concat(f))
 	}
 
 
@@ -182,8 +191,17 @@ class Schemable {
 
 
 	validate(x, path) {
-		this.validator.forEach(f => f(x, path || "It"))
-		return true
+		try {
+			this.validator.forEach(f => f(x, path || "It"))
+			this.mapper.forEach(f => x = f(x))
+		} catch (e) {
+			if (this.error.length > 0) {
+				this.error.forEach(f => x = f(e, x))
+			} else {
+				throw e
+			}
+		}
+		return x
 	}
 
 	parse(json) {

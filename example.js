@@ -15,21 +15,27 @@ user.validate({
 	age: 19,
 	sex: "female"
 })
-// true
+
+assert.throws(() => user.validate({
+	name: "Beckey",
+	pass: "P",
+	age: 19,
+	sex: "female"
+}))
 
 
 
 // Types
 
-assert(T.num.validate(3.14))
-assert(T.int.validate(3))
-assert(T.str.validate("3"))
-assert(T.bool.validate(true))
-assert(T.array.validate([1,2,3]))
-assert(T.obj({i: T.int}).validate({i: 3}))
-assert(T.option(T.int).validate(null))
-assert(T.option(T.int).validate(3))
-assert(T.oneOf([1,2,3]).validate(3))
+T.num.validate(3.14)
+T.int.validate(3)
+T.str.validate("3")
+T.bool.validate(true)
+T.array.validate([1,2,3])
+T.obj({i: T.int}).validate({i: 3})
+T.option(T.int).validate(null)
+T.option(T.int).validate(3)
+T.oneOf([1,2,3]).validate(3)
 
 assert.throws(() => T.num.validate("45"))
 assert.throws(() => T.num.validate({i: 5}))
@@ -90,6 +96,12 @@ assert(T.addValidator((x, path) => {
 		throw new Error(`${path} shoud be even`)
 	}
 }))
+
+// map
+assert(T.int.map(x => x * 2).validate(10) === 20)
+
+// catch
+assert(T.int.catch((e, x) => Math.floor(x) || 0).validate(12.5) === 12)
 
 
 console.log("All test passed.")
