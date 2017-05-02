@@ -33,7 +33,7 @@ T.str.validate("3")
 T.bool.validate(true)
 T.null.validate(null)
 T.null.validate(undefined)
-T.array.validate([1,2,3])
+T.array(T.int).validate([1,2,3])
 T.obj({i: T.int}).validate({i: 3})
 T.option(T.int).validate(null)
 T.option(T.int).validate(3)
@@ -46,7 +46,7 @@ assert.throws(() => T.int.validate("98"))
 assert.throws(() => T.str.validate(7))
 assert.throws(() => T.bool.validate(1))
 assert.throws(() => T.null.validate(0))
-assert.throws(() => T.array.validate({0: "v0"}))
+assert.throws(() => T.array(T.any).validate({0: "v0"}))
 assert.throws(() => T.obj({s: T.str}).validate({}))
 assert.throws(() => T.obj({}).validate([]))
 assert.throws(() => T.option(T.int).validate("string"))
@@ -82,7 +82,7 @@ assert.throws(() => T.num.between(1, 3).validate(4))
 
 
 // Arrays and strings is compared with its length
-T.array.atLeast(3).validate([1, 2, 3])
+T.array(T.int).atLeast(3).validate([1, 2, 3])
 T.str.atLeast(7).validate("1234567")
 
 

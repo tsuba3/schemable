@@ -84,10 +84,13 @@ class Schemable {
 		return this.null
 	}
 
-	get array() {
+	array(obj) {
 		return this.addValidator((x, path) => {
 			if (type(x) != "Array") {
 				throw new Error(`${path} should be an array`)
+			}
+			for (var i = 0; i < x.length; i++) {
+				obj.validate(x[i], `${path}[${i}]`)
 			}
 		})
 	}
