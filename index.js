@@ -111,7 +111,7 @@ class Schemable {
 
 	option(nullable) {
 		return this.addValidator((x, path) => {
-			if (x !== null) nullable.validate(x)
+			if (x != null) nullable.validate(x)
 		})
 	}
 

@@ -36,6 +36,7 @@ T.null.validate(undefined)
 T.array(T.int).validate([1,2,3])
 T.obj({i: T.int}).validate({i: 3})
 T.option(T.int).validate(null)
+T.option(T.int).validate(undefined)
 T.option(T.int).validate(3)
 T.oneOf([1,2,3]).validate(3)
 
